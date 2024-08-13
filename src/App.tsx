@@ -1,14 +1,16 @@
-import Router from "~/router";
-import { Header } from "./components/Header";
+import React from "react";
+import { GlobalStyle } from "./styles";
+import Layout from "./Layout";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <Header>
-        <h1>Caju Front Teste</h1>
-      </Header>
-      <Router />
-    </>
+    <BrowserRouter>
+      <React.StrictMode>
+        <GlobalStyle />
+        <Layout />
+      </React.StrictMode>
+    </BrowserRouter>
   );
 }
 
