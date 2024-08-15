@@ -1,8 +1,8 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { RegistrationCardProps } from "~/pages/UserPage/ListUser/components";
-import { Routes, StatusColumns } from "~/types";
-import { RegistrationProps, useUser } from "./useUser";
+import { RegistrationsProps, Routes } from "~/types";
+import { useUser } from "./useUser";
 import { ModalContext } from "~/context";
 
 interface useUserPageResponse {
@@ -15,8 +15,16 @@ interface useUserPageResponse {
 export const useUserPage = (): useUserPageResponse => {
   const history = useHistory();
   const { showModal } = useContext(ModalContext);
-  const { registrations } = useUser();
-  const [registrationsFiltered, setRegistrationFiltered] = useState<Array<RegistrationProps>>(registrations);
+  const { registrations, getRegistrations, udpdateRegistrations, deleteRegistrations } = useUser();
+  const [registrationsFiltered, setRegistrationFiltered] = useState<Array<RegistrationsProps>>(registrations);
+
+  useEffect(() => {
+    getRegistrations();
+  }, [getRegistrations]);
+
+  useEffect(() => {
+    setRegistrationFiltered(registrations);
+  }, [registrations]);
 
   const goToNewAdmissionPage = () => {
     history.push(Routes.NEW_USER);
@@ -27,33 +35,34 @@ export const useUserPage = (): useUserPageResponse => {
   }
 
   const onFilterByCpf = (e: ChangeEvent<HTMLInputElement>) => {
-    const filtered = registrations.filter(registration => registration.cpf === e.target.value)
+    const { value } = e.target
+    const filtered = !value ? registrations : registrations.filter(registration => registration.cpf === value)
     setRegistrationFiltered(filtered)
   }
 
-  const onClickAction = (item: string, status: StatusColumns) => {
-    console.log(item, status);
+  const onClickAction = (data: RegistrationsProps) => {
+    udpdateRegistrations(data);
   }
 
-  const onClickRemove = (item: string) => {
-    console.log(item);
+  const onClickRemove = (id: string) => {
+    deleteRegistrations(id)
   }
 
-  const onConfirmAction = (item: string, status: StatusColumns) => {
+  const onConfirmAction = (data: RegistrationsProps) => {
     showModal({
       title: 'Atenção',
       description: 'Tem certeza que deseja realizar essa ação',
       confirm: 'sim',
-      onClickConfirm: () => onClickAction(item, status),
+      onClickConfirm: () => onClickAction(data),
     });
   }
 
-  const onConfirmRemove = (item: string) => {
+  const onConfirmRemove = (id: string) => {
     showModal({
       title: 'Atenção',
       description: 'Tem certeza que deseja remover esse usuário',
       confirm: 'sim',
-      onClickConfirm: () => onClickRemove(item),
+      onClickConfirm: () => onClickRemove(id),
     });
   }
 

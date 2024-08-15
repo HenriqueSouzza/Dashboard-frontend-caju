@@ -1,37 +1,35 @@
-import { StatusColumns } from "~/types";
-
-export interface RegistrationProps {
-  id: number
-  employeeName: string
-  email: string
-  cpf: string
-  admissionDate: string
-  status: StatusColumns
-}
+import { useCallback, useState } from "react";
+import { RegistrationsService } from "~/services";
+import { RegistrationsProps } from "~/types";
 
 interface useUserResponseProps {
-  registrations: Array<RegistrationProps>
+  registrations: Array<RegistrationsProps>
+  getRegistrations: () => void
+  udpdateRegistrations: (data: RegistrationsProps) => void
+  deleteRegistrations: (id: string) => void
 }
 
 export const useUser = (): useUserResponseProps => {
-  const registrations = [{
-    id: 1,
-    employeeName: 'teste',
-    cpf: '0123456781',
-    email: 'teste@teste.com',
-    admissionDate: '10/10/2020',
-    status: StatusColumns.REVIEW,
-  },
-  {
-    id: 2,
-    employeeName: 'teste',
-    cpf: '0123456789',
-    email: 'teste@teste.com',
-    admissionDate: '10/10/2020',
-    status: StatusColumns.APPROVED,
-  }];
+  const [registrations, setRegistrations] = useState<Array<RegistrationsProps>>([]);
+
+  const getRegistrations = useCallback(async () => {
+    setRegistrations(await RegistrationsService.get());
+  }, []);
+
+  const udpdateRegistrations = useCallback(async (data: RegistrationsProps) => {
+    await RegistrationsService.put(data.id!, data);
+    getRegistrations();
+  }, [getRegistrations]);
+
+  const deleteRegistrations = useCallback(async (id: string) => {
+    await RegistrationsService.delete(id);
+    getRegistrations();
+  }, [getRegistrations]);
 
   return {
-    registrations
+    registrations,
+    getRegistrations,
+    udpdateRegistrations,
+    deleteRegistrations
   }
 }
