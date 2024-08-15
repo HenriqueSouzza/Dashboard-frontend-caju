@@ -36,7 +36,7 @@ export const useDashboard = (): useDashboardResponse => {
 
   const onFilterByCpf = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
-    const filtered = !value ? list : list.filter(registration => registration.cpf === value)
+    const filtered = !value ? list : list.filter(registration => registration.cpf?.includes(value))
     setRegistrationFiltered(filtered)
   }
 

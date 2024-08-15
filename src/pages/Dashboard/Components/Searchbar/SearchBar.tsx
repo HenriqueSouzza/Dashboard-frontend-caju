@@ -20,6 +20,7 @@ export const SearchBar = ({
       name="cpf"
       onMask={Mask.cpfMask}
       onChange={onFilterByCpf}
+      maxLength={14}
       aria-placeholder="Digite um CPF válido"
       placeholder="Digite um CPF válido"
     />

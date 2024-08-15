@@ -1,3 +1,12 @@
 {
-  "registrations": []
+  "registrations": [
+    {
+      "id": "309b",
+      "employeeName": "Henrique Souza",
+      "email": "henriquehps1997@gmail.com",
+      "admissionDate": "14/08/2024",
+      "status": "REPROVED",
+      "cpf": "012.345.678-90"
+    }
+  ]
 }
