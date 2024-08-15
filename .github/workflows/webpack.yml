@@ -26,5 +26,3 @@ jobs:
       run: |
         yarn 
         yarn build
-        yarn preview
-        yarn init:db
