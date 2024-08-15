@@ -19,19 +19,18 @@ const registrationStatusStyles: {
 };
 
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 24px;
+  display: flex;
+  gap: 24px;
   justify-content: center;
   margin-top: 24px;
 `;
 
 export const Column = styled.div<{ $status: StatusColumns }>`
+  min-width: 30%;
   height: auto;
   background-color: ${({ $status }) => registrationStatusStyles[$status].background};
   border-radius: 32px;
-  min-height: 80vh;
-  max-height: 80vh;
+  height: 80vh;
 `;
 
 export const TitleColumn = styled.h3<{ $status: StatusColumns }>`

@@ -16,6 +16,7 @@ export const SearchBar = ({
 }: SearchBarProps) => (
   <S.Container>
     <TextField
+      name="cpf"
       onChange={onFilterByCpf}
       aria-placeholder="Digite um CPF válido"
       placeholder="Digite um CPF válido"

@@ -1,9 +1,10 @@
 import { StatusColumns } from "~/types";
 
-interface RegistrationProps {
+export interface RegistrationProps {
   id: number
   employeeName: string
   email: string
+  cpf: string
   admissionDate: string
   status: StatusColumns
 }
@@ -16,6 +17,7 @@ export const useUser = (): useUserResponseProps => {
   const registrations = [{
     id: 1,
     employeeName: 'teste',
+    cpf: '0123456781',
     email: 'teste@teste.com',
     admissionDate: '10/10/2020',
     status: StatusColumns.REVIEW,
@@ -23,6 +25,7 @@ export const useUser = (): useUserResponseProps => {
   {
     id: 2,
     employeeName: 'teste',
+    cpf: '0123456789',
     email: 'teste@teste.com',
     admissionDate: '10/10/2020',
     status: StatusColumns.APPROVED,

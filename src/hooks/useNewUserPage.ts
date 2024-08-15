@@ -3,6 +3,8 @@ import { Routes } from "~/types"
 import { Convert, Messages, Validations } from "~/utils"
 import { useForm } from '.';
 import { Control } from "react-hook-form";
+import { useContext } from "react";
+import { ModalContext } from "~/context";
 
 interface DataNewUserProps {
   name?: string
@@ -28,6 +30,7 @@ const { IsFullName, isEmailValid, isCpfValid } = Validations;
 
 export const useNewUserPage = (): useNewUserPageResponseProps => {
   const history = useHistory();
+  const { showModal } = useContext(ModalContext);
   const { handleSubmit, control } = useForm<DataNewUserProps>({ mode: "onChange" });
 
   const goToHome = () => {
@@ -38,6 +41,7 @@ export const useNewUserPage = (): useNewUserPageResponseProps => {
     if (formData?.admissionDate) {
       formData.admissionDate = Convert.convertDate(formData.admissionDate)
     }
+
     console.log(formData);
   }
 
@@ -46,11 +50,20 @@ export const useNewUserPage = (): useNewUserPageResponseProps => {
     name: (value: string) => IsFullName(value) || nameUncomplete,
     cpf: (value: string) => isCpfValid(value) || invalidCpf,
     required
-  }
+  };
+
+  const onConfirm = (value: DataNewUserProps) => {
+    showModal({
+      title: 'Atenção',
+      description: 'Tem certeza que deseja realizar essa ação',
+      confirm: 'sim',
+      onClickConfirm: () => onNewUser(value)
+    });
+  };
 
   return {
     goToHome,
-    onSubmit: handleSubmit(onNewUser),
+    onSubmit: handleSubmit(onConfirm),
     control,
     validate
   }

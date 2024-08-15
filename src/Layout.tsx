@@ -8,7 +8,7 @@ function Layout() {
     <>
       <Header>
         <h1>Caju Front Teste</h1>
-      </Header >
+      </Header>
       <Main>
         <Switch>
           <Route exact path={Routes.LIST_USER} component={ListUserPage} />
