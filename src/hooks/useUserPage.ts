@@ -31,7 +31,7 @@ export const useUserPage = (): useUserPageResponse => {
   };
 
   const refreshPage = () => {
-    history.go(0);
+    getRegistrations();
   }
 
   const onFilterByCpf = (e: ChangeEvent<HTMLInputElement>) => {

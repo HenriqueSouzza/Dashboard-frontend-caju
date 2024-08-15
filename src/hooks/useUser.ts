@@ -1,4 +1,5 @@
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
+import { LoadingContext } from "~/context";
 import { RegistrationsService } from "~/services";
 import { RegistrationsProps } from "~/types";
 
@@ -6,15 +7,31 @@ interface useUserResponseProps {
   registrations: Array<RegistrationsProps>
   getRegistrations: () => void
   udpdateRegistrations: (data: RegistrationsProps) => void
+  createRegistrations: (data: RegistrationsProps) => void
   deleteRegistrations: (id: string) => void
+  loading: boolean
 }
 
 export const useUser = (): useUserResponseProps => {
   const [registrations, setRegistrations] = useState<Array<RegistrationsProps>>([]);
+  const { loading, showLoading } = useContext(LoadingContext);
 
-  const getRegistrations = useCallback(async () => {
-    setRegistrations(await RegistrationsService.get());
-  }, []);
+  const getRegistrations = useCallback(() => {
+    showLoading(true);
+    RegistrationsService.get()
+      .then(response => {
+        showLoading(false);
+        setRegistrations(response)
+      });
+  }, [showLoading]);
+
+  const createRegistrations = useCallback((data: RegistrationsProps) => {
+    showLoading(true);
+    RegistrationsService.post(data)
+      .then(() => {
+        showLoading(false);
+      });
+  }, [showLoading]);
 
   const udpdateRegistrations = useCallback(async (data: RegistrationsProps) => {
     await RegistrationsService.put(data.id!, data);
@@ -28,8 +45,10 @@ export const useUser = (): useUserResponseProps => {
 
   return {
     registrations,
-    getRegistrations,
+    getRegistrations: getRegistrations,
+    createRegistrations,
     udpdateRegistrations,
-    deleteRegistrations
+    deleteRegistrations,
+    loading,
   }
 }

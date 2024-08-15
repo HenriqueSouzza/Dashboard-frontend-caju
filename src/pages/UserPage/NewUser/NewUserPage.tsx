@@ -13,7 +13,7 @@ export const NewUserPage = () => {
     validate: {
       cpf,
       email,
-      name,
+      employeeName,
       required
     }
   } = useNewUserPage();
@@ -26,11 +26,11 @@ export const NewUserPage = () => {
             <HiOutlineArrowLeft size={24} />
           </Button>
           <Controller
-            name={"name"}
+            name={"employeeName"}
             control={control}
             rules={{
               required,
-              validate: name
+              validate: employeeName
             }}
             defaultValue=""
             render={({ field, fieldState: { error } }) => (

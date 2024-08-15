@@ -1,5 +1,5 @@
 export enum StatusColumns {
   REVIEW = "REVIEW",
-  APPROVED = "APPROVED",
+  APPROVED = "APROVED",
   REPROVED = "REPROVED",
 }
