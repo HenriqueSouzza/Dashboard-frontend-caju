@@ -1,25 +1,19 @@
 import { ChangeEvent } from "react";
 import { useHistory } from "react-router-dom";
-import { Routes } from "~/types";
-import { Convert } from "~/utils";
-
-interface DataUserProps {
-  email?: string
-  name?: string
-  cpf?: string
-  admissionDate?: string
-}
+import { RegistrationCardProps } from "~/pages/UserPage/ListUser/components";
+import { Routes, StatusColumns } from "~/types";
+import { useUser } from "./useUser";
 
 interface useUserPageResponse {
   goToNewAdmissionPage: () => void
   refreshPage: () => void
   onFilterByCpf: (e: ChangeEvent<HTMLInputElement>) => void
-  goToHome: () => void
-  onSubmitNewUser: (formData: DataUserProps) => void
+  registrationsCard: Array<RegistrationCardProps>
 }
 
 export const useUserPage = (): useUserPageResponse => {
   const history = useHistory();
+  const { registrations } = useUser();
 
   const goToNewAdmissionPage = () => {
     history.push(Routes.NEW_USER);
@@ -29,27 +23,24 @@ export const useUserPage = (): useUserPageResponse => {
     history.go(0);
   }
 
-  const goToHome = () => {
-    history.push(Routes.LIST_USER);
-  }
-
   const onFilterByCpf = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value)
   }
 
-  const onSubmitNewUser = (formData: DataUserProps) => {
-    if (formData?.admissionDate) {
-      formData.admissionDate = Convert.convertDate(formData.admissionDate)
-    }
-
-    console.log(formData)
+  const onClickAction = (item: string, status: StatusColumns) => {
+    console.log(item, status);
   }
+
+  const onClickRemove = (item: string) => {
+    console.log(item);
+  }
+
+  const registrationsCard = registrations.map(registration => ({ ...registration, onClickAction, onClickRemove }));
 
   return {
     goToNewAdmissionPage,
     refreshPage,
     onFilterByCpf,
-    goToHome,
-    onSubmitNewUser
+    registrationsCard,
   }
 }

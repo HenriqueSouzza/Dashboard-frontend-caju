@@ -9,4 +9,8 @@ export const GlobalStyle = createGlobalStyle`
     padding-block: 0;
     font-family: Open-Sans, Helvetica, Sans-Serif;
   }
+
+  input:focus {
+    outline: none;
+  }
 `;

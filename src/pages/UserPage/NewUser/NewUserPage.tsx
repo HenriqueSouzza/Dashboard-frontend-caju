@@ -1,40 +1,101 @@
+import { Controller } from "react-hook-form";
 import * as S from "./styles";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { Button, TextField } from "~/components";
-import { useUserPage } from "~/hooks";
+import { useNewUserPage } from "~/hooks";
+import { Mask } from "~/utils";
 
 export const NewUserPage = () => {
-  const { goToHome, onSubmitNewUser } = useUserPage();
+  const {
+    goToHome,
+    onSubmit,
+    control,
+    validate: {
+      cpf,
+      email,
+      name,
+      required
+    }
+  } = useNewUserPage();
 
   return (
     <S.Container>
       <S.Card>
-        <S.Form onSubmit={onSubmitNewUser}>
+        <S.Form onSubmit={onSubmit}>
           <Button size="sm" $onlyicon onClick={goToHome} aria-label="back">
             <HiOutlineArrowLeft size={24} />
           </Button>
-          <TextField
-            type="text"
-            name="name"
-            placeholder="Nome"
-            label="Nome"
+          <Controller
+            name={"name"}
+            control={control}
+            rules={{
+              required,
+              validate: name
+            }}
+            defaultValue=""
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                type="text"
+                {...field}
+                error={error}
+                placeholder="Nome"
+                label="Nome"
+              />
+            )}
           />
-          <TextField
-            type="text"
-            name="email"
-            placeholder="Email"
-            label="Email"
+          <Controller
+            name={"email"}
+            control={control}
+            rules={{
+              required,
+              validate: email
+            }}
+            defaultValue=""
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                type="text"
+                {...field}
+                error={error}
+                placeholder="Email"
+                label="Email"
+              />
+            )}
           />
-          <TextField
-            type="text"
-            name="cpf"
-            placeholder="CPF"
-            label="CPF"
+          <Controller
+            name={"cpf"}
+            control={control}
+            rules={{
+              required,
+              validate: cpf
+            }}
+            defaultValue=""
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                type="text"
+                {...field}
+                error={error}
+                placeholder="CPF"
+                label="CPF"
+                maxLength={14}
+                onMask={Mask.cpfMask}
+              />
+            )}
           />
-          <TextField
-            name="admissionDate"
-            label="Data de admissão"
-            type="date"
+          <Controller
+            name={"admissionDate"}
+            control={control}
+            rules={{
+              required,
+            }}
+            defaultValue=""
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                type="date"
+                {...field}
+                error={error}
+                label="Date de admissao"
+              />
+            )}
           />
           <Button type="submit">
             Cadastrar

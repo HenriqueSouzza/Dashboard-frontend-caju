@@ -3,12 +3,12 @@ import * as S from './Button.styles';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm'
-  bgcolor?: string
+  $bgcolor?: string
   $onlyicon?: boolean
-  variant?: 'default' | 'nobody'
+  $variant?: 'default' | 'nobody'
 }
 
 export const Button = ({
-  variant = 'default',
+  $variant = 'default',
   ...props
-}: ButtonProps) => <S.Button variant={variant} {...props} />
+}: ButtonProps) => <S.Button $variant={$variant} {...props} />

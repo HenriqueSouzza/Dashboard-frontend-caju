@@ -1,29 +1,16 @@
-const isFulled = (value: string) => {
-  if (value === '' || value === null) {
-    return false;
-  }
+const isNotEmpty = (value: string) => value.length > 0;
 
-  return true
-}
+const isEmailValid = (email: string) => /\S+@\S+\.\S+/.test(email);
 
-const isEmail = (email: string) => {
-  const regex = /\S+@\S+\.\S+/
-  return regex.test(email);
-}
-
-const IsFullNameValid = (name: string) => {
+const IsFullName = (name: string) => {
   name = name.trim();
 
   const firstCharacter = name.substring(0, 1);
-  if (isNaN(Number(firstCharacter))) {
+  if (!isNaN(Number(firstCharacter))) {
     return false;
   }
 
-  if (!name.includes(' ')) {
-    return false;
-  }
-
-  return true;
+  return name.includes(' ');
 }
 
 const isCpfValid = (cpf: string) => {
@@ -88,8 +75,8 @@ const isCpfValid = (cpf: string) => {
 }
 
 export const Validations = {
-  isEmail,
-  IsFullNameValid,
+  isEmailValid,
+  IsFullName,
   isCpfValid,
-  isFulled
+  isNotEmpty
 };

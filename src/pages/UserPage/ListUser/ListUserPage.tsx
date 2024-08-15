@@ -7,7 +7,8 @@ export const ListUserPage = () => {
   const {
     onFilterByCpf,
     goToNewAdmissionPage,
-    refreshPage
+    refreshPage,
+    registrationsCard,
   } = useUserPage();
 
   return (
@@ -17,12 +18,7 @@ export const ListUserPage = () => {
         onClickRefresh={refreshPage}
         onClickNewAdmissionPage={goToNewAdmissionPage}
       />
-      <Columns registrations={[{
-        id: 1,
-        employeeName: 'teste',
-        email: 'teste@teste.com',
-        admissionDate: '10/10/2020'
-      }]} />
+      <Columns registrations={registrationsCard} />
     </S.Container>
   );
 }

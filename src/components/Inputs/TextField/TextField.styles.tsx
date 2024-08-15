@@ -24,20 +24,27 @@ export const Label = styled.label`
   
 `;
 
-export const Message = styled.p``;
+export const Message = styled.p`
+  font-size: 12px;
+  padding-left: 5px;
+`;
 
-export const Field = styled.div<{ $error?: boolean }>`
+export const Field = styled.div<{ $error?: string | boolean }>`
   display: flex;
   flex-direction: column;
+  gap: 5px;
 
   ${({ $error }) => $error && `
+    &:focus-visible {
+      outline: 1px solid red;
+    }
+
     ${Input} {
       border: 1px solid red;
     }
     
     ${Message}{
       color: red;
-      visibility: 
     }
   `}
 `;

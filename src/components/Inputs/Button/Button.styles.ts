@@ -16,6 +16,10 @@ export const Button = styled.button<ButtonProps>`
   font-size: 16px;
   font-weight: 600;
 
+  &:disabled {
+    background-color: gray;
+  }
+
   ${({ size, }) => size === 'sm' && css`
     font-size: 12px;
     border-radius: 4px;
@@ -23,8 +27,8 @@ export const Button = styled.button<ButtonProps>`
     height: auto;
   `}
 
-  ${({ bgcolor, color }) => css`
-    background-color: ${bgcolor};
+  ${({ $bgcolor, color }) => css`
+    background-color: ${$bgcolor};
     color: ${color};
   `}
 
@@ -44,7 +48,7 @@ export const Button = styled.button<ButtonProps>`
     }
   `}
 
-  ${({ variant }) => variant === 'nobody' && css`
+  ${({ $variant }) => $variant === 'nobody' && css`
     background: none;
     color: #000;
     box-shadow: none;
