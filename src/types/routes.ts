@@ -1,4 +1,4 @@
 export enum Routes {
-  NEW_USER = '/new-user',
+  NEW_REGISTRATION = '/new-registration',
   DASHBOARD = '/dashboard',
 }

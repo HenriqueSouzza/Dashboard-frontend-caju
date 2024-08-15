@@ -1,7 +1,7 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { RegistrationsProps, Routes } from "~/types";
-import { useUser } from "./useUser";
+import { useRegistrations } from ".";
 import { ModalContext } from "~/context";
 import { RegistrationCardProps } from "~/pages/Dashboard/Components";
 
@@ -15,37 +15,37 @@ interface useDashboardResponse {
 export const useDashboard = (): useDashboardResponse => {
   const history = useHistory();
   const { showModal } = useContext(ModalContext);
-  const { registrations, getRegistrations, udpdateRegistrations, deleteRegistrations } = useUser();
-  const [registrationsFiltered, setRegistrationFiltered] = useState<Array<RegistrationsProps>>(registrations);
+  const { registrations: { list, get, update, remove } } = useRegistrations();
+  const [registrationsFiltered, setRegistrationFiltered] = useState<Array<RegistrationsProps>>(list);
 
   useEffect(() => {
-    getRegistrations();
-  }, [getRegistrations]);
+    get();
+  }, [get]);
 
   useEffect(() => {
-    setRegistrationFiltered(registrations);
-  }, [registrations]);
+    setRegistrationFiltered(list);
+  }, [list]);
 
   const goToNewAdmissionPage = () => {
-    history.push(Routes.NEW_USER);
+    history.push(Routes.NEW_REGISTRATION);
   };
 
   const refreshPage = () => {
-    getRegistrations();
+    get();
   }
 
   const onFilterByCpf = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
-    const filtered = !value ? registrations : registrations.filter(registration => registration.cpf === value)
+    const filtered = !value ? list : list.filter(registration => registration.cpf === value)
     setRegistrationFiltered(filtered)
   }
 
   const onClickAction = (data: RegistrationsProps) => {
-    udpdateRegistrations(data);
+    update(data);
   }
 
   const onClickRemove = (id: string) => {
-    deleteRegistrations(id)
+    remove(id);
   }
 
   const onConfirmAction = (data: RegistrationsProps) => {

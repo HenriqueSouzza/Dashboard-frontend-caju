@@ -1,72 +1,72 @@
-import { useHistory } from "react-router-dom"
-import { RegistrationsProps, Routes, StatusColumns } from "~/types"
-import { Convert, Messages, Validations } from "~/utils"
-import { useForm, useUser } from '.';
-import { Control } from "react-hook-form";
-import { useContext } from "react";
-import { ModalContext } from "~/context";
+import { useCallback, useContext, useState } from "react";
+import { LoadingContext } from "~/context";
+import { RegistrationsService } from "~/services";
+import { RegistrationsProps } from "~/types";
+import { Messages, toast } from "~/utils";
 
-interface FieldFormProps {
-  employeeName?: string
-  cpf?: string
-  email?: string
-  admissionDate?: string
+interface useRegistrations {
+  registrations: {
+    list: Array<RegistrationsProps>
+    get: () => void
+    create: (data: RegistrationsProps, callback: () => void) => void
+    update: (data: RegistrationsProps) => void
+    remove: (id: string) => void
+  }
+  loading: boolean
 }
 
-interface useRegistrationsResponseProps {
-  onSubmit: () => void
-  goToHome: () => void
-  validate: {
-    email: (value: string) => string | boolean
-    employeeName: (value: string) => string | boolean
-    cpf: (value: string) => string | boolean
-    required: string
-  }
-  control: Control
-}
+export const useRegistrations = (): useRegistrations => {
+  const [registrations, setRegistrations] = useState<Array<RegistrationsProps>>([]);
+  const { loading, showLoading } = useContext(LoadingContext);
 
-const { required, nameUncomplete, invalidaEmail, invalidCpf } = Messages.error;
-const { IsFullName, isEmailValid, isCpfValid } = Validations;
+  const get = useCallback(() => {
+    showLoading(true);
+    RegistrationsService.get().then(response => {
+      setRegistrations(response)
+    }).catch(() => {
+      toast(Messages.error.request.get);
+    }).finally(() => showLoading(false));
+  }, [showLoading]);
 
-export const useRegistrations = (): useRegistrationsResponseProps => {
-  const history = useHistory();
-  const { showModal } = useContext(ModalContext);
-  const { createRegistrations } = useUser();
-  const { handleSubmit, control } = useForm<FieldFormProps>({ mode: "onChange" });
-
-  const goToHome = () => {
-    history.push(Routes.DASHBOARD);
-  }
-
-  const onNewUser = (formData: RegistrationsProps) => {
-    if (formData?.admissionDate) {
-      formData.admissionDate = Convert.convertDate(formData.admissionDate)
-    }
-    formData.status = StatusColumns.REVIEW;
-    createRegistrations(formData);
-    goToHome();
-  }
-
-  const validate = {
-    email: (value: string) => isEmailValid(value) || invalidaEmail,
-    employeeName: (value: string) => IsFullName(value) || nameUncomplete,
-    cpf: (value: string) => isCpfValid(value) || invalidCpf,
-    required
-  };
-
-  const onConfirm = (value: FieldFormProps) => {
-    showModal({
-      title: 'Atenção',
-      description: 'Tem certeza que deseja realizar essa ação',
-      confirm: 'sim',
-      onClickConfirm: () => onNewUser(value)
+  const create = useCallback((data: RegistrationsProps, callback: () => void) => {
+    showLoading(true);
+    RegistrationsService.post(data).then(() => {
+      toast(Messages.success.request.create);
+      showLoading(false);
+    }).catch(() => {
+      toast(Messages.error.request.create);
+    }).finally(() => {
+      showLoading(false);
+      callback();
     });
-  };
+  }, [showLoading]);
+
+  const update = useCallback(async (data: RegistrationsProps) => {
+    RegistrationsService.put(data.id!, data).then(() => {
+      toast(Messages.success.request.update);
+      get();
+    }).catch(() => {
+      toast(Messages.error.request.update);
+    });
+  }, [get]);
+
+  const remove = useCallback(async (id: string) => {
+    RegistrationsService.delete(id).then(() => {
+      toast(Messages.success.request.remove);
+      get();
+    }).catch(() => {
+      toast(Messages.error.request.remove);
+    });
+  }, [get]);
 
   return {
-    goToHome,
-    onSubmit: handleSubmit(onConfirm),
-    control,
-    validate
+    registrations: {
+      list: registrations,
+      get,
+      create,
+      update,
+      remove,
+    },
+    loading
   }
 }

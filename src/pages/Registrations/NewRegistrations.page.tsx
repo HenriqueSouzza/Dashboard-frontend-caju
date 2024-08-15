@@ -2,10 +2,10 @@ import { Controller } from "react-hook-form";
 import * as S from "./styles";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { Button, TextField } from "~/components";
-import { useRegistrations } from "~/hooks";
+import { useNewRegistrations } from "~/hooks";
 import { Mask } from "~/utils";
 
-export const Registrations = () => {
+export const NewRegistrations = () => {
   const {
     goToHome,
     onSubmit,
@@ -16,7 +16,7 @@ export const Registrations = () => {
       employeeName,
       required
     }
-  } = useRegistrations();
+  } = useNewRegistrations();
 
   return (
     <S.Container>

@@ -2,6 +2,7 @@ import { HiRefresh } from "react-icons/hi";
 import * as S from "./SearchBar.styles";
 import { Button, TextField } from "~/components";
 import { ChangeEvent } from "react";
+import { Mask } from "~/utils";
 
 interface SearchBarProps {
   onClickRefresh: () => void
@@ -17,6 +18,7 @@ export const SearchBar = ({
   <S.Container>
     <TextField
       name="cpf"
+      onMask={Mask.cpfMask}
       onChange={onFilterByCpf}
       aria-placeholder="Digite um CPF válido"
       placeholder="Digite um CPF válido"

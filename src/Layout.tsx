@@ -1,7 +1,7 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 import { Header, Main } from "./components";
 import { Routes } from "./types";
-import { Registrations, Dashboard } from "./pages";
+import { NewRegistrations, Dashboard } from "./pages";
 
 function Layout() {
   return (
@@ -12,7 +12,7 @@ function Layout() {
       <Main>
         <Switch>
           <Route exact path={Routes.DASHBOARD} component={Dashboard} />
-          <Route exact path={Routes.NEW_USER} component={Registrations} />
+          <Route exact path={Routes.NEW_REGISTRATION} component={NewRegistrations} />
           <Route exact path="*">
             <Redirect to={Routes.DASHBOARD} />
           </Route>

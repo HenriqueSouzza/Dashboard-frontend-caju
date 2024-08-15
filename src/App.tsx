@@ -3,6 +3,8 @@ import { GlobalStyle } from "./styles";
 import Layout from "./Layout";
 import { BrowserRouter } from "react-router-dom";
 import { ModalProvider, LoadingProvider } from "~/provider";
+import { Toast } from "./components";
+
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
         <LoadingProvider>
           <ModalProvider>
             <Layout />
+            <Toast />
           </ModalProvider>
         </LoadingProvider>
       </React.StrictMode>
