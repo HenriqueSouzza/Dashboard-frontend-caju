@@ -1,15 +1,14 @@
-import { useUserPage } from "~/hooks";
-import { SearchBar } from "./components/Searchbar";
+import { useDashboard } from "~/hooks";
 import * as S from "./styles";
-import { Columns } from "./components";
+import { Columns, SearchBar } from "./Components";
 
-export const ListUserPage = () => {
+export const Dashboard = () => {
   const {
     onFilterByCpf,
     goToNewAdmissionPage,
     refreshPage,
     registrationsCard,
-  } = useUserPage();
+  } = useDashboard();
 
   return (
     <S.Container>

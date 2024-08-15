@@ -1,5 +1,5 @@
 import { Button } from "~/components";
-import * as S from "./styles";
+import * as S from "./RegistrationCard.styles";
 import {
   HiOutlineMail,
   HiOutlineUser,
@@ -13,7 +13,7 @@ export interface RegistrationCardProps extends RegistrationsProps {
   onClickRemove: (id: string) => void
 }
 
-const RegistrationCard = ({
+export const RegistrationCard = ({
   id,
   employeeName,
   email,
@@ -84,5 +84,3 @@ const RegistrationCard = ({
     </S.Card>
   )
 };
-
-export default RegistrationCard;

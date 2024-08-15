@@ -2,10 +2,10 @@ import { Controller } from "react-hook-form";
 import * as S from "./styles";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { Button, TextField } from "~/components";
-import { useNewUserPage } from "~/hooks";
+import { useRegistrations } from "~/hooks";
 import { Mask } from "~/utils";
 
-export const NewUserPage = () => {
+export const Registrations = () => {
   const {
     goToHome,
     onSubmit,
@@ -16,13 +16,13 @@ export const NewUserPage = () => {
       employeeName,
       required
     }
-  } = useNewUserPage();
+  } = useRegistrations();
 
   return (
     <S.Container>
       <S.Card>
         <S.Form onSubmit={onSubmit}>
-          <Button size="sm" $onlyicon onClick={goToHome} aria-label="back">
+          <Button size="sm" $onlyicon type={'button'} onClick={goToHome} aria-label="back">
             <HiOutlineArrowLeft size={24} />
           </Button>
           <Controller

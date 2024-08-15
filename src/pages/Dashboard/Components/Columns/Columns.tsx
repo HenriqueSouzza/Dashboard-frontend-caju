@@ -1,6 +1,6 @@
 
-import * as S from "./styles";
-import RegistrationCard, { RegistrationCardProps } from "../RegistrationCard/RegistrationCard";
+import { RegistrationCard, RegistrationCardProps } from "../RegistrationCard";
+import * as S from "./Columns.styles";
 import { StatusColumns } from "~/types";
 
 interface CollumnsProps {

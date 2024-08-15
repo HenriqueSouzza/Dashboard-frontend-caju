@@ -3,17 +3,17 @@ import { RegistrationsProps, Routes, StatusColumns } from "~/types"
 import { Convert, Messages, Validations } from "~/utils"
 import { useForm, useUser } from '.';
 import { Control } from "react-hook-form";
-import { useCallback, useContext } from "react";
+import { useContext } from "react";
 import { ModalContext } from "~/context";
 
-interface DataNewUserProps {
+interface FieldFormProps {
   employeeName?: string
   cpf?: string
   email?: string
   admissionDate?: string
 }
 
-interface useNewUserPageResponseProps {
+interface useRegistrationsResponseProps {
   onSubmit: () => void
   goToHome: () => void
   validate: {
@@ -28,17 +28,15 @@ interface useNewUserPageResponseProps {
 const { required, nameUncomplete, invalidaEmail, invalidCpf } = Messages.error;
 const { IsFullName, isEmailValid, isCpfValid } = Validations;
 
-export const useNewUserPage = (): useNewUserPageResponseProps => {
+export const useRegistrations = (): useRegistrationsResponseProps => {
   const history = useHistory();
   const { showModal } = useContext(ModalContext);
-  const { createRegistrations, loading } = useUser();
-  const { handleSubmit, control } = useForm<DataNewUserProps>({ mode: "onChange" });
+  const { createRegistrations } = useUser();
+  const { handleSubmit, control } = useForm<FieldFormProps>({ mode: "onChange" });
 
-  const goToHome = useCallback(() => {
-    if (!loading) {
-      history.push(Routes.LIST_USER);
-    }
-  }, [loading, history])
+  const goToHome = () => {
+    history.push(Routes.DASHBOARD);
+  }
 
   const onNewUser = (formData: RegistrationsProps) => {
     if (formData?.admissionDate) {
@@ -56,7 +54,7 @@ export const useNewUserPage = (): useNewUserPageResponseProps => {
     required
   };
 
-  const onConfirm = (value: DataNewUserProps) => {
+  const onConfirm = (value: FieldFormProps) => {
     showModal({
       title: 'Atenção',
       description: 'Tem certeza que deseja realizar essa ação',

@@ -1,18 +1,18 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { RegistrationCardProps } from "~/pages/UserPage/ListUser/components";
 import { RegistrationsProps, Routes } from "~/types";
 import { useUser } from "./useUser";
 import { ModalContext } from "~/context";
+import { RegistrationCardProps } from "~/pages/Dashboard/Components";
 
-interface useUserPageResponse {
+interface useDashboardResponse {
   goToNewAdmissionPage: () => void
   refreshPage: () => void
   onFilterByCpf: (e: ChangeEvent<HTMLInputElement>) => void
   registrationsCard: Array<RegistrationCardProps>
 }
 
-export const useUserPage = (): useUserPageResponse => {
+export const useDashboard = (): useDashboardResponse => {
   const history = useHistory();
   const { showModal } = useContext(ModalContext);
   const { registrations, getRegistrations, udpdateRegistrations, deleteRegistrations } = useUser();

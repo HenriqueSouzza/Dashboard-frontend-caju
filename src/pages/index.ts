@@ -1,1 +1,2 @@
-export * as UserPage from './UserPage'
+export * from './Registrations';
+export * from './Dashboard';

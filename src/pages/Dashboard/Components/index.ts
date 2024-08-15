@@ -1,3 +1,3 @@
 export * from './Columns';
-export * from './RegistrationCard/RegistrationCard';
+export * from './RegistrationCard';
 export * from './Searchbar';

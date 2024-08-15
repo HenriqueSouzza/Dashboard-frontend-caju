@@ -1,5 +1,5 @@
 import { HiRefresh } from "react-icons/hi";
-import * as S from "./styles";
+import * as S from "./SearchBar.styles";
 import { Button, TextField } from "~/components";
 import { ChangeEvent } from "react";
 
