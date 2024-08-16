@@ -103,5 +103,5 @@ export const NewRegistrations = () => {
         </S.Form>
       </S.Card>
     </S.Container>
-  )
+  );
 };

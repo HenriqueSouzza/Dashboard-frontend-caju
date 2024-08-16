@@ -7,17 +7,27 @@ export const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   gap: 16px;
+  height: calc(100vh - 64px);
+
+  @media (max-width: 500px) {
+    justify-content: start;
+  }
 `;
 
 export const Card = styled.div`
-  width: 500px;
+  width: 460px;
   border-width: 2px;
   border-color: #f0f0f0;
   border-style: solid;
-  padding: 48px;
+
+  @media (max-width: 500px) {
+    width: 100%;
+    border-width: 0;
+  }
 `;
 
 export const Form = styled(FormComponent)`
+  padding: 40px;
   display: flex;
   gap: 16px;
   flex-direction: column;

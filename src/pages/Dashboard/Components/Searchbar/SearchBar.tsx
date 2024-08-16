@@ -21,6 +21,7 @@ export const SearchBar = ({
       onMask={Mask.cpfMask}
       onChange={onFilterByCpf}
       maxLength={14}
+      label="Filtrar por CPF"
       aria-placeholder="Digite um CPF válido"
       placeholder="Digite um CPF válido"
     />

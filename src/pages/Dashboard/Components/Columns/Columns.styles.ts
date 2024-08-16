@@ -20,17 +20,20 @@ const registrationStatusStyles: {
 
 export const Container = styled.div`
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 24px;
-  justify-content: center;
-  margin-top: 24px;
 `;
 
 export const Column = styled.div<{ $status: StatusColumns }>`
-  min-width: 30%;
-  height: auto;
   background-color: ${({ $status }) => registrationStatusStyles[$status].background};
   border-radius: 32px;
   height: 80vh;
+  flex-basis: calc(33% - 24px);
+
+  @media (max-width: 1080px) {
+    flex-basis: 100%;
+  }
 `;
 
 export const TitleColumn = styled.h3<{ $status: StatusColumns }>`
