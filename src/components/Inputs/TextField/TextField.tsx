@@ -1,4 +1,4 @@
-import { ChangeEvent, InputHTMLAttributes } from 'react';
+import { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react';
 import * as S from './TextField.styles';
 
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -10,14 +10,14 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   onMask?: (value: string) => string
 }
 
-export const TextField = ({
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({
   id,
   label,
   error,
   onChange,
   onMask,
   ...props
-}: TextFieldProps) => {
+}: TextFieldProps, ref) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (onMask) {
       e.target.value = onMask(e.target.value);
@@ -31,6 +31,7 @@ export const TextField = ({
       <S.Label htmlFor={id}>{label}</S.Label>
       <S.Input
         id={id}
+        ref={ref}
         onChange={handleChange}
         {...props}
       />
@@ -39,4 +40,4 @@ export const TextField = ({
       )}
     </S.Field>
   )
-};
+});
