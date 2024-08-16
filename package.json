@@ -27,6 +27,8 @@
     "styled-components": "^6.1.11"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
     "@chromatic-com/storybook": "^1.6.1",
     "@nabla/vite-plugin-eslint": "^2.0.4",
     "@storybook/addon-essentials": "^8.2.9",
@@ -37,8 +39,8 @@
     "@storybook/react": "^8.2.9",
     "@storybook/react-vite": "^8.2.9",
     "@storybook/test": "^8.2.9",
-    "@testing-library/jest-dom": "^6.4.6",
-    "@testing-library/react": "13.0.0",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
     "@types/jest": "^29.5.12",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
@@ -46,6 +48,7 @@
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "babel-jest": "^29.7.0",
     "cypress": "^13.13.3",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",

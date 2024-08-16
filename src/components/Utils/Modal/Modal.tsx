@@ -7,8 +7,8 @@ interface ModalProps extends DialogHTMLAttributes<HTMLDialogElement> {
   description?: string
   confirmLabel?: string
   hideLabel?: string
-  onClickConfirm: () => void
-  onClickHide: () => void
+  onClickConfirm?: () => void
+  onClickHide?: () => void
 }
 
 export const Modal = ({

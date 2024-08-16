@@ -1,5 +1,6 @@
 import axios from "axios";
+import { Env } from "~/constants";
 
 export const service = axios.create({
-  baseURL: import.meta.env.VITE_HOST_API
+  baseURL: Env.api,
 });

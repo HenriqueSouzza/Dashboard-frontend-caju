@@ -1,4 +1,4 @@
-const isNotEmpty = (value: string) => value.length > 0;
+const isNotEmpty = (value: string) => value.trim().length > 0;
 
 const isEmailValid = (email: string) => /\S+@\S+\.\S+/.test(email);
 
