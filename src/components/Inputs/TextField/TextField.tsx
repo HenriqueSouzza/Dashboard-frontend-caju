@@ -1,7 +1,7 @@
 import { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react';
 import * as S from './TextField.styles';
 
-interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
   name: string
   error?: {
