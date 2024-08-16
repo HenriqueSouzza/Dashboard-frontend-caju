@@ -33,11 +33,11 @@ export const useRegistrations = (): useRegistrations => {
     RegistrationsService.post(data).then(() => {
       toast(Messages.success.request.create);
       showLoading(false);
+      callback();
     }).catch(() => {
       toast(Messages.error.request.create);
     }).finally(() => {
       showLoading(false);
-      callback();
     });
   }, [showLoading]);
 
