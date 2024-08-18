@@ -30,6 +30,7 @@ export const SearchBar = ({
         onClick={onClickRefresh}
         size="sm"
         $onlyicon
+        data-testid="btn-refresh"
         aria-label="refetch">
         <HiRefresh />
       </Button>

@@ -4,7 +4,7 @@ export default {
   preset: "ts-jest",
   testEnvironment: "jsdom",
   transform: {
-    "^.+\\.tsx?$": ["ts-jest", { isolatedModules: true }],
+    "^.+\\.(ts|tsx)?$": ["ts-jest", { isolatedModules: true }],
     "^.+\\.(js|jsx)$": "babel-jest",
   },
   moduleNameMapper: {

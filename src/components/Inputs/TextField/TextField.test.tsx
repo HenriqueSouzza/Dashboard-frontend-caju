@@ -37,7 +37,7 @@ describe('TextField', () => {
     expect(onChange).toHaveBeenCalledWith(
       expect.objectContaining({
         target: expect.objectContaining({
-          value: '012.345.678-90'
+          value: Mask.cpfMask('01234567890')
         })
       })
     );

@@ -16,7 +16,7 @@ const ListColumns = [
 export const Columns = ({ registrations }: CollumnsProps) => (
   <S.Container>
     {ListColumns.map((column: { status: StatusColumns, title: string }) => (
-      <S.Column $status={column.status} key={column.title}>
+      <S.Column data-testid={column.status} $status={column.status} key={column.title}>
         <S.TitleColumn $status={column.status}>
           {column.title}
         </S.TitleColumn>

@@ -76,6 +76,7 @@ export const RegistrationCard = ({
         )}
         <Button
           size="sm"
+          data-testid="btn-remove"
           $variant="nobody"
           onClick={() => onClickRemove(id!)}>
           <HiOutlineTrash size={15} />

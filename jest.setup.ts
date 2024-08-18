@@ -5,3 +5,9 @@ jest.mock('~/constants', () => ({
     api: '',
   }
 }));
+
+jest.mock('react-toastify/dist/ReactToastify.css', () => ({
+  toast: {
+    success: jest.fn(),
+  },
+}));

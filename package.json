@@ -10,7 +10,7 @@
     "build": "tsc && vite build",
     "cy:open": "cypress open --config-file ./cypress/cypress.config.ts",
     "cy:run": "cypress run --config-file ./cypress/cypress.config.ts",
-    "test:dev": "jest --watch --verbose --no-cache",
+    "test:dev": "jest --verbose --no-cache",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "build-storybook": "storybook build"
