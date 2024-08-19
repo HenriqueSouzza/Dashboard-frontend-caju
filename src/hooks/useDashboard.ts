@@ -1,7 +1,7 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { RegistrationsProps, Routes } from "~/types";
-import { useRegistrations } from ".";
+import { useRegistrations } from "~/hooks";
 import { ModalContext } from "~/context";
 import { RegistrationCardProps } from "~/pages/Dashboard/Components";
 
@@ -13,7 +13,7 @@ interface useDashboardResponse {
 }
 
 export const useDashboard = (): useDashboardResponse => {
-  const history = useHistory();
+  const { push } = useHistory();
   const { showModal } = useContext(ModalContext);
   const { registrations: { list, get, update, remove } } = useRegistrations();
   const [registrationsFiltered, setRegistrationFiltered] = useState<Array<RegistrationsProps>>(list);
@@ -27,7 +27,7 @@ export const useDashboard = (): useDashboardResponse => {
   }, [list]);
 
   const goToNewAdmissionPage = () => {
-    history.push(Routes.NEW_REGISTRATION);
+    push(Routes.NEW_REGISTRATION);
   };
 
   const refreshPage = () => {

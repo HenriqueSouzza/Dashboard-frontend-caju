@@ -11,3 +11,8 @@ jest.mock('react-toastify/dist/ReactToastify.css', () => ({
     success: jest.fn(),
   },
 }));
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: jest.fn(),
+}));
