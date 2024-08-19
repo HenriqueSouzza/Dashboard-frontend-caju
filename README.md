@@ -9,6 +9,16 @@
 * Storybook
 ```
 
+# project
+
+O projeto está com pipeline na vercel para acessar, siga: 
+
+```bash
+https://dashboard-frontend-caju.vercel.app/ (interface)
+https://dashboard-frontend-caju-storybook.vercel.app/ (storybook)
+https://json-server-api-mock.vercel.app/ (api)
+```
+
 # Requirements
 
 - Node 20
